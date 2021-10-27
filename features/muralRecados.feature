@@ -36,3 +36,5 @@ And eu n∆o escrevo nada
 When eu clico para submeter a mensagem
 Then nenhuma nova postagem aparece no mural
 Ane eu ainda posso ver o mural e todas as suas postagens
+"Cen†rio de falha 1" 
+"Cen†rio de falha 2" 
