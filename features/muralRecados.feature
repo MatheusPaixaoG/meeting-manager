@@ -38,3 +38,5 @@ Then nenhuma nova postagem aparece no mural
 Ane eu ainda posso ver o mural e todas as suas postagens
 "Cen rio de falha 1" 
 "Cen rio de falha 2" 
+"Outro cen rio" 
+"Outro cen rio" 
