@@ -43,3 +43,5 @@ Ane eu ainda posso ver o mural e todas as suas postagens
 "Cen rio para gerar falha no merge" 
 "cen rio criado para teste do merge" 
 "linha do commit rebase main" 
+"cen rio criado para teste" 
+"linha do commit rebase 1" 
