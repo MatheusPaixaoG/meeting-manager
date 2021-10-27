@@ -32,3 +32,4 @@ Feature: Conflict warning to meeting
         And I have a meeting scheduled at "8:00 am to 9:00 am"
         When I try to create a new meeting for "9:00 am to 10:00 am"
         Then I can to see a message "Meeting created successfully!"
+        And I can to see a meeting scheduled at "9:00 am to 10:00 am"
