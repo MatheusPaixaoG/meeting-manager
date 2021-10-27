@@ -32,3 +32,8 @@ Feature: Conflict warning to meeting
         And I have a meeting scheduled at "8:00 am to 9:00 am"
         When I try to create a new meeting for "9:00 am to 10:00 am"
         Then I can to see a message "Meeting created successfully!"
+
+    Scenario: Create a new meeting in invalid time
+        Given I am at the "Create a new meeting" page
+        When I try to crete a new meeting for "25:00 pm to 26:00 pm"
+        Then I can to see a message "Erro! Invalid time"
