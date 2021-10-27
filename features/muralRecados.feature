@@ -41,4 +41,4 @@ Ane eu ainda posso ver o mural e todas as suas postagens
 "Outro cen rio" 
 "Outro cen rio" 
 "Cen rio para gerar falha no merge" 
-"cen rio criado para teste" 
+"cen rio criado para teste do merge" 
