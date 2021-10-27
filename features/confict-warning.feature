@@ -44,3 +44,4 @@ Feature: Conflict warning to meeting
         And I already have a meeting scheduled at "7:15 pm to 7:45 pm"
         When I try to create a new meeting for "7:15 pm to 7:45 pm"
         Then I can to see a message "Erro! You already have another meeting scheduled in this time." 
+        And I can to see a meeting scheduled at "7:15 pm to 7:45 pm"
