@@ -17,3 +17,11 @@ Feature: criação de reuniões
 		And os usuários "pedro123" e "joao123" estão cadastrados sistema
 		When solicito a criação de uma reunião com "pedro123" e "vitoria123"
 		Then uma mensagem de erro é mostrada na tela
+	
+	Scenario: Criação de reunião com limite de participantes excedido
+		Given que estou na página "criação de reunião"
+		And os usuários "pedro123", "joao123" e "vitor123" estão cadastrados sistema
+		And o limite de participantes para uma reunião é de "2" usuários
+		When solicito a criação de uma reunião com "pedro123", "joao123" e “vitor123”
+		Then uma mensagem de erro é mostrada na tela
+		
