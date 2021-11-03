@@ -12,4 +12,8 @@ Feature: criação de reuniões
 		And seleciono para reunião a data "11/11/21" e o horário "08:00"
 		Then uma mensagem de confirmação da criação é mostrada na tela
 	
-	
+	Scenario: Criação de reunião com usuário não cadastrado
+		Given que estou na página "criação de reunião"
+		And os usuários "pedro123" e "joao123" estão cadastrados sistema
+		When solicito a criação de uma reunião com "pedro123" e "vitoria123"
+		Then uma mensagem de erro é mostrada na tela
