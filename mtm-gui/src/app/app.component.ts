@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'mtm-gui';
+  recado: Recado = { author: "", content: "" };
+}
+
+export class Recado {
+  author!: string;//Mural sendo um array de Postagens e sendo um atributo da classe reunião
+  content!: string;
 }
