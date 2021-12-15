@@ -2,10 +2,20 @@
 
 <h2>Nome da reunião</h2>
 
-<ul>
-  <li>Recado 1</li>
+<ul *ngFor="let recado of mural.mural">
+  <li>
+    <h4> {{ recado.author }} </h4>
+    <p> {{ recado.content }} </p>
+  </li>
 </ul>
-<div>
-  <input ng-model="recado.content">
-  <button>Enviar</button>
-</div>
+<table>
+  <tr>
+    <td><label>Autor</label></td>
+    <td><input [(ngModel)]="recado.author"></td>
+    <td><button (click)="addMessage(recado)">Enviar</button></td>
+  </tr>
+  <tr>
+    <td><label>Mensagem</label></td>
+    <td><input [(ngModel)]="recado.content"></td>
+  </tr>
+</table>

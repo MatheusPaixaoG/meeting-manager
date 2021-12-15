@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { Mural } from './mural';
+import { Recado } from './Recado';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,10 @@ import { NgModule } from '@angular/core';
 })
 export class AppComponent {
   recado: Recado = { author: "", content: "" };
-}
+  mural = new Mural();
 
-export class Recado {
-  author!: string;//Mural sendo um array de Postagens e sendo um atributo da classe reunião
-  content!: string;
+  addMessage(r: Recado): void {
+    this.mural.addMessage(r);
+    this.recado = { author: "", content: "" };
+  }
 }
