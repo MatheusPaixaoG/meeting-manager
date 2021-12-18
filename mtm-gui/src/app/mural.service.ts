@@ -1,9 +1,8 @@
-import { Mural } from "./mural";
 import { Recado } from "./Recado";
-
+import { Reuniao } from "./reuniao";
 export class MuralService {
-  mural: Mural = new Mural();
+  reuniao: Reuniao = new Reuniao();
   addMessage(recado: Recado): void {
-    this.mural.mural.push(recado);
+    this.reuniao.mural.push(recado);
   }
 }

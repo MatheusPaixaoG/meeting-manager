@@ -1,10 +1,10 @@
 <h1>Mural de Recados</h1>
 
-<ul *ngFor="let reuniao of reuniaoService.reunioes">
-  <li>
-    <h4> {{ reuniao.title }} </h4>
-    <p> {{ reuniao.date }} </p>
-    <p> {{ reuniao.description }}</p>
+<ul>
+  <li *ngFor="let reuniao of reuniaoService.reunioes">
+    <span> {{ reuniao.title }} </span>
+    <span> {{ reuniao.date }} </span>
+    <span> {{ reuniao.description }}</span>
   </li>
 </ul>
 
@@ -24,10 +24,10 @@
 
 <h2>Nome da reunião</h2>
 
-<ul *ngFor="let recado of reuniao.mural">
-  <li>
-    <h4> {{ recado.author }} </h4>
-    <p> {{ recado.content }} </p>
+<ul>
+  <li *ngFor="let recado of muralService.reuniao.mural">
+    <span> {{ recado.author }} </span>
+    <span> {{ recado.content }} </span>
   </li>
 </ul>
 <table>
