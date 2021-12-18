@@ -21,13 +21,21 @@ export class AppComponent {
 
   addMeeting(rn: Reuniao): void {
     this.date = new Date();
-    this.reuniaoService.addMeeting(rn, this.date);
-    this.reunioes.push(rn);
-    this.reuniao = { title: "", description: "", mural: [], date: this.date };
+    if (this.reuniaoService.addMeeting(rn, this.date)) {
+      this.reunioes.push(rn);
+      this.reuniao = { title: "", description: "", mural: [], date: this.date };
+    } else {
+      this.reuniao.title = "";
+    }
   }
   addMessage(r: Recado): void {
-    this.muralService.addMessage(r);
-    this.mural.push(r);
-    this.recado = { author: "", content: "" };
+    var regex = "^\\s*$";
+    if (!r.content.match(regex)) {  // Se nada tiver sido escrito no campo da mensagem, pede para escrever algo
+      this.muralService.addMessage(r);
+      this.mural.push(r);
+      this.recado = { author: "", content: "" };
+    } else {
+      this.recado.content = "Digite algum conteúdo";
+    }
   }
 }
