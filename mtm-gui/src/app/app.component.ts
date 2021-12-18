@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
-import { Mural } from './mural';
 import { Recado } from './Recado';
+import { Reuniao } from './reuniao';
+import { ReuniaoService } from './reuniao.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,23 @@ import { Recado } from './Recado';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  date!: Date;
+  reuniao: Reuniao = {
+    title: "", description: "", mural: [],
+    date: this.date,
+    addMessage: function (recado: Recado): void {
+      this.mural.push(recado);
+    }
+  };
   recado: Recado = { author: "", content: "" };
-  mural = new Mural();
+  reuniaoService = new ReuniaoService();
 
+  addMeeting(rn: Reuniao): void {
+    this.date = new Date();
+    this.reuniaoService.addMeeting(rn, this.date);
+  }
   addMessage(r: Recado): void {
-    this.mural.addMessage(r);
+    this.reuniao.addMessage(r);
     this.recado = { author: "", content: "" };
   }
 }

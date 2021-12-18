@@ -1,8 +1,30 @@
 <h1>Mural de Recados</h1>
 
+<ul *ngFor="let reuniao of reuniaoService.reunioes">
+  <li>
+    <h4> {{ reuniao.title }} </h4>
+    <p> {{ reuniao.date }} </p>
+    <p> {{ reuniao.description }}</p>
+  </li>
+</ul>
+
+<table>
+  <tr>
+    <td><label>Título da reunião</label></td>
+    <td><input [(ngModel)]="reuniao.title"></td>
+    <td><button (click)="addMeeting(reuniao)">Enviar</button></td>
+  </tr>
+  <tr>
+    <td><label>Descrição da reunião</label></td>
+    <td><input [(ngModel)]="reuniao.description"></td>
+  </tr>
+</table>
+
+
+
 <h2>Nome da reunião</h2>
 
-<ul *ngFor="let recado of mural.mural">
+<ul *ngFor="let recado of reuniao.mural">
   <li>
     <h4> {{ recado.author }} </h4>
     <p> {{ recado.content }} </p>
