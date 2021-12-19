@@ -14,8 +14,10 @@ import { UsuarioLogin } from './usuarioLogin';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  usuario: Usuario = { nome: "", email: "", senha: "", cpf: "" };
+  usuario: Usuario = { nome: "", email: "", senha: "", cpf: "", reunioes: [] };
   usuarioLogin: UsuarioLogin = { email: "", senha: "" };
+  usuarioAtivo = new Usuario();
+  indexOfEmail!: string;
   date!: Date;
   reuniao: Reuniao = { title: "", description: "", mural: [], date: this.date };
   reunioes: Reuniao[] = [];
@@ -34,7 +36,7 @@ export class AppComponent {
 
   addMeeting(rn: Reuniao): void {
     this.date = new Date();
-    if (this.reuniaoService.addMeeting(rn, this.date)) {
+    if (this.reuniaoService.addMeeting(rn, this.date, this.usuarioAtivo)) {
       this.reunioes.push(rn);
       this.reuniao = { title: "", description: "", mural: [], date: this.date };
     } else {
@@ -45,7 +47,8 @@ export class AppComponent {
   verifyUser(us: UsuarioLogin): void {
     if (this.emailOuSenhaCorretos(false, us.email)) {
       if (this.emailOuSenhaCorretos(true, us.senha)) {
-        console.log("Login feito com sucesso");
+        this.usuarioAtivo = this.usuarios[parseInt(this.indexOfEmail)];
+        console.log("Login feito com sucesso" + this.usuarioAtivo.nome);
         this.usuarioLogin = { email: "", senha: "" };
       } else {
         this.usuarioLoginSenhaIncorreta = true;
@@ -55,12 +58,13 @@ export class AppComponent {
     }
   }
 
-  emailOuSenhaCorretos(eSenha: boolean, emailSenha: string): Usuario | undefined {
+  emailOuSenhaCorretos(eSenha: boolean, emailSenha: string): boolean | Usuario | undefined {
     var result = undefined;
-    if (eSenha) {
-      result = this.usuarios.find(u => u.senha == emailSenha);
+    if (eSenha) { // Só entra aqui se um email tiver sido encontrado
+      result = this.usuarios[parseInt(this.indexOfEmail)].senha == emailSenha;
     } else {
       result = this.usuarios.find(u => u.email == emailSenha);
+      this.indexOfEmail = this.usuarios.findIndex(u => u.email == emailSenha).toString();
     }
     return result;
   }
@@ -68,7 +72,7 @@ export class AppComponent {
   addUser(u: Usuario): void {
     if (this.usuarioService.addUser(u)) {
       this.usuarios.push(u);
-      this.usuario = { nome: "", email: "", senha: "", cpf: "" };
+      this.usuario = { nome: "", email: "", senha: "", cpf: "", reunioes: [] };
     } else {
       this.emailDuplicado = true;
       this.cpfDuplicado = true;

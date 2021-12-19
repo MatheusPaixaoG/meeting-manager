@@ -39,10 +39,10 @@
     </tr>
   </table>
   
-  <h1>Mural de Recados</h1>
+  <h1>Lista de reuniões</h1>
   
   <ul>
-    <li *ngFor="let reuniao of reunioes">
+    <li *ngFor="let reuniao of usuarioAtivo.reunioes">
       <span> {{ reuniao.title }} </span>
       <span> {{ reuniao.date }} </span>
       <span> {{ reuniao.description }}</span>
@@ -62,7 +62,7 @@
     </tr>
   </table>
   
-  <h2>Nome da reunião</h2>
+  <h2>Mural da reunião</h2>
   
   <ul>
     <li *ngFor="let recado of mural">
