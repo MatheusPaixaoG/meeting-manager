@@ -25,6 +25,8 @@ export class AppComponent {
   reuniaoService = new ReuniaoService();
   muralService = new MuralService();
   usuarioService = new UsuarioService();
+  emailDuplicado: boolean = false;
+  cpfDuplicado: boolean = false;
 
   addMeeting(rn: Reuniao): void {
     this.date = new Date();
@@ -66,9 +68,14 @@ export class AppComponent {
       this.usuarios.push(u);
       this.usuario = { nome: "", email: "", senha: "", cpf: "" };
     } else {
-      this.usuario.email = "";
-      this.usuario.cpf = "";
+      this.emailDuplicado = true;
+      this.cpfDuplicado = true;
     }
+  }
+
+  onMove(): void {
+    this.emailDuplicado = false;
+    this.cpfDuplicado = false;
   }
 
   addMessage(r: Recado): void {
