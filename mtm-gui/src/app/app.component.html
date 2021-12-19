@@ -52,6 +52,7 @@
       <td><label>Título da reunião</label></td>
       <td><input [(ngModel)]="reuniao.title"></td>
       <td><button (click)="addMeeting(reuniao)">Enviar</button></td>
+      <td *ngIf="tituloReuniaoDuplicado">Já existe uma reunião com esse título</td>
     </tr>
     <tr>
       <td><label>Descrição da reunião</label></td>

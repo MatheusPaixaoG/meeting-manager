@@ -27,6 +27,7 @@ export class AppComponent {
   usuarioService = new UsuarioService();
   emailDuplicado: boolean = false;
   cpfDuplicado: boolean = false;
+  tituloReuniaoDuplicado: boolean = false;
 
   addMeeting(rn: Reuniao): void {
     this.date = new Date();
@@ -34,7 +35,7 @@ export class AppComponent {
       this.reunioes.push(rn);
       this.reuniao = { title: "", description: "", mural: [], date: this.date };
     } else {
-      this.reuniao.title = "";
+      this.tituloReuniaoDuplicado = true;
     }
   }
 
@@ -76,6 +77,7 @@ export class AppComponent {
   onMove(): void {
     this.emailDuplicado = false;
     this.cpfDuplicado = false;
+    this.tituloReuniaoDuplicado = false;
   }
 
   addMessage(r: Recado): void {
