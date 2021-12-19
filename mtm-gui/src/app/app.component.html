@@ -1,43 +1,85 @@
-<h1>Mural de Recados</h1>
-
-<ul>
-  <li *ngFor="let reuniao of reunioes">
-    <span> {{ reuniao.title }} </span>
-    <span> {{ reuniao.date }} </span>
-    <span> {{ reuniao.description }}</span>
-  </li>
-</ul>
-
-<table>
-  <tr>
-    <td><label>Título da reunião</label></td>
-    <td><input [(ngModel)]="reuniao.title"></td>
-    <td><button (click)="addMeeting(reuniao)">Enviar</button></td>
-  </tr>
-  <tr>
-    <td><label>Descrição da reunião</label></td>
-    <td><input [(ngModel)]="reuniao.description"></td>
-  </tr>
-</table>
-
-
-
-<h2>Nome da reunião</h2>
-
-<ul>
-  <li *ngFor="let recado of mural">
-    <span> {{ recado.author }} </span>
-    <span> {{ recado.content }} </span>
-  </li>
-</ul>
-<table>
-  <tr>
-    <td><label>Autor</label></td>
-    <td><input [(ngModel)]="recado.author"></td>
-    <td><button (click)="addMessage(recado)">Enviar</button></td>
-  </tr>
-  <tr>
-    <td><label>Mensagem</label></td>
-    <td><input [(ngModel)]="recado.content"></td>
-  </tr>
-</table>
+<html (mousemove)="onMove()">
+  <h1>Gerenciador de reuniões</h1>
+  
+  <h2>Cadastro</h2>
+  <table>
+    <tr>
+      <td><label>Nome</label></td>
+      <td><input [(ngModel)]="usuario.nome"></td>
+      <td><button (click)="addUser(usuario)">Cadastrar</button></td>
+    </tr>
+    <tr>
+      <td><label>Email</label></td>
+      <td><input [(ngModel)]="usuario.email"></td>
+      <td *ngIf="emailDuplicado">Já existe um usuário com esse email</td>
+    </tr>
+    <tr>
+      <td><label>Senha</label></td>
+      <td><input [(ngModel)]="usuario.senha"></td>
+    </tr>
+    <tr>
+      <td><label>CPF</label></td>
+      <td><input [(ngModel)]="usuario.cpf"></td>
+      <td *ngIf="cpfDuplicado">Já existe um usuário com esse CPF</td>
+    </tr>
+  </table>
+  
+  <h2>Login</h2>
+  <table>
+    <tr>
+      <td><label>Email</label></td>
+      <td><input [(ngModel)]="usuarioLogin.email"></td>
+      <td><button (click)="verifyUser(usuarioLogin)">Login</button></td>
+      <td *ngIf="usuarioLoginEmailIncorreto">Email incorreto</td>
+    </tr>
+    <tr>
+      <td><label>Senha</label></td>
+      <td><input [(ngModel)]="usuarioLogin.senha"></td>
+      <td *ngIf="usuarioLoginSenhaIncorreta">Senha incorreta</td>
+    </tr>
+  </table>
+  
+  <h1>Mural de Recados</h1>
+  
+  <ul>
+    <li *ngFor="let reuniao of reunioes">
+      <span> {{ reuniao.title }} </span>
+      <span> {{ reuniao.date }} </span>
+      <span> {{ reuniao.description }}</span>
+    </li>
+  </ul>
+  
+  <table>
+    <tr>
+      <td><label>Título da reunião</label></td>
+      <td><input [(ngModel)]="reuniao.title"></td>
+      <td><button (click)="addMeeting(reuniao)">Enviar</button></td>
+      <td *ngIf="tituloReuniaoDuplicado">Já existe uma reunião com esse título</td>
+    </tr>
+    <tr>
+      <td><label>Descrição da reunião</label></td>
+      <td><input [(ngModel)]="reuniao.description"></td>
+    </tr>
+  </table>
+  
+  <h2>Nome da reunião</h2>
+  
+  <ul>
+    <li *ngFor="let recado of mural">
+      <span> {{ recado.author }} </span>
+      <span> {{ recado.content }} </span>
+    </li>
+  </ul>
+  <table>
+    <tr>
+      <td><label>Autor</label></td>
+      <td><input [(ngModel)]="recado.author"></td>
+      <td><button (click)="addMessage(recado)">Enviar</button></td>
+    </tr>
+    <tr>
+      <td><label>Mensagem</label></td>
+      <td><input [(ngModel)]="recado.content"></td>
+      <td *ngIf="recadoSemConteudo">Digite um conteúdo para o recado</td>
+    </tr>
+  </table>
+</html>
