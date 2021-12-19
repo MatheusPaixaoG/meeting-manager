@@ -29,13 +29,17 @@ export class AppComponent {
     }
   }
   addMessage(r: Recado): void {
-    var regex = "^\\s*$";
-    if (!r.content.match(regex)) {  // Se nada tiver sido escrito no campo da mensagem, pede para escrever algo
+    if (this.descricaoValida(r.content)) {  // Se nada tiver sido escrito no campo da mensagem, pede para escrever algo
       this.muralService.addMessage(r);
       this.mural.push(r);
       this.recado = { author: "", content: "" };
     } else {
       this.recado.content = "Digite algum conteúdo";
     }
+  }
+
+  descricaoValida(content: string): boolean {
+    var regex = "^\\s*$";
+    return !content.match(regex);
   }
 }
