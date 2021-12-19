@@ -29,6 +29,8 @@ export class AppComponent {
   cpfDuplicado: boolean = false;
   tituloReuniaoDuplicado: boolean = false;
   recadoSemConteudo: boolean = false;
+  usuarioLoginSenhaIncorreta: boolean = false;
+  usuarioLoginEmailIncorreto: boolean = false;
 
   addMeeting(rn: Reuniao): void {
     this.date = new Date();
@@ -46,12 +48,10 @@ export class AppComponent {
         console.log("Login feito com sucesso");
         this.usuarioLogin = { email: "", senha: "" };
       } else {
-        console.log("Senha incorreta");
-        this.usuarioLogin.senha = "";
+        this.usuarioLoginSenhaIncorreta = true;
       }
     } else {
-      console.log("Email incorreto");
-      this.usuarioLogin.email = "";
+      this.usuarioLoginEmailIncorreto = true;
     }
   }
 
@@ -80,6 +80,8 @@ export class AppComponent {
     this.cpfDuplicado = false;
     this.tituloReuniaoDuplicado = false;
     this.recadoSemConteudo = false;
+    this.usuarioLoginSenhaIncorreta = false;
+    this.usuarioLoginEmailIncorreto = false;
   }
 
   addMessage(r: Recado): void {
