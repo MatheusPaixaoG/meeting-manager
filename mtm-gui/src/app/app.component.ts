@@ -18,6 +18,7 @@ export class AppComponent {
   reuniao: Reuniao = { title: "", description: "", mural: [], date: this.date };
   reunioes: Reuniao[] = [];
   mural: Recado[] = [];
+  usuarios: Usuario[] = [];
   recado: Recado = { author: "", content: "" };
   reuniaoService = new ReuniaoService();
   muralService = new MuralService();
@@ -34,8 +35,13 @@ export class AppComponent {
   }
 
   addUser(u: Usuario): void {
-    this.usuarioService.addUser(u);
-    this.usuario = { nome: "", email: "", senha: "", cpf: "" };
+    if (this.usuarioService.addUser(u)) {
+      this.usuarios.push(u);
+      this.usuario = { nome: "", email: "", senha: "", cpf: "" };
+    } else {
+      this.usuario.email = "";
+      this.usuario.cpf = "";
+    }
   }
 
   addMessage(r: Recado): void {
