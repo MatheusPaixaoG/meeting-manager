@@ -4,6 +4,8 @@ import { Recado } from './Recado';
 import { Reuniao } from './reuniao';
 import { ReuniaoService } from './reuniao.service';
 import { MuralService } from './mural.service';
+import { Usuario } from './usuario';
+import { UsuarioService } from './usuario.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,7 @@ import { MuralService } from './mural.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  usuario: Usuario = { nome: "", email: "", senha: "", cpf: "" };
   date!: Date;
   reuniao: Reuniao = { title: "", description: "", mural: [], date: this.date };
   reunioes: Reuniao[] = [];
@@ -18,6 +21,7 @@ export class AppComponent {
   recado: Recado = { author: "", content: "" };
   reuniaoService = new ReuniaoService();
   muralService = new MuralService();
+  usuarioService = new UsuarioService();
 
   addMeeting(rn: Reuniao): void {
     this.date = new Date();
@@ -28,6 +32,12 @@ export class AppComponent {
       this.reuniao.title = "";
     }
   }
+
+  addUser(u: Usuario): void {
+    this.usuarioService.addUser(u);
+    this.usuario = { nome: "", email: "", senha: "", cpf: "" };
+  }
+
   addMessage(r: Recado): void {
     if (this.descricaoValida(r.content)) {  // Se nada tiver sido escrito no campo da mensagem, pede para escrever algo
       this.muralService.addMessage(r);

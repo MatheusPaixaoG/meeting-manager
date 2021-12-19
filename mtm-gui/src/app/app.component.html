@@ -1,3 +1,27 @@
+<h1>Gerenciador de reuniões</h1>
+
+<h2>Cadastro</h2>
+<table>
+  <tr>
+    <td><label>Nome</label></td>
+    <td><input [(ngModel)]="usuario.nome"></td>
+    <td><button (click)="addUser(usuario)">Cadastrar</button></td>
+  </tr>
+  <tr>
+    <td><label>Email</label></td>
+    <td><input [(ngModel)]="usuario.email"></td>
+  </tr>
+  <tr>
+    <td><label>Senha</label></td>
+    <td><input [(ngModel)]="usuario.senha"></td>
+  </tr>
+  <tr>
+    <td><label>CPF</label></td>
+    <td><input [(ngModel)]="usuario.cpf"></td>
+  </tr>
+</table>
+
+
 <h1>Mural de Recados</h1>
 
 <ul>
