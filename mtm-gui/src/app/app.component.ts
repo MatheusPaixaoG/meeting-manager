@@ -6,6 +6,7 @@ import { ReuniaoService } from './reuniao.service';
 import { MuralService } from './mural.service';
 import { Usuario } from './usuario';
 import { UsuarioService } from './usuario.service';
+import { UsuarioLogin } from './usuarioLogin';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { UsuarioService } from './usuario.service';
 })
 export class AppComponent {
   usuario: Usuario = { nome: "", email: "", senha: "", cpf: "" };
+  usuarioLogin: UsuarioLogin = { email: "", senha: "" };
   date!: Date;
   reuniao: Reuniao = { title: "", description: "", mural: [], date: this.date };
   reunioes: Reuniao[] = [];
@@ -32,6 +34,31 @@ export class AppComponent {
     } else {
       this.reuniao.title = "";
     }
+  }
+
+  verifyUser(us: UsuarioLogin): void {
+    if (this.emailOuSenhaCorretos(false, us.email)) {
+      if (this.emailOuSenhaCorretos(true, us.senha)) {
+        console.log("Login feito com sucesso");
+        this.usuarioLogin = { email: "", senha: "" };
+      } else {
+        console.log("Senha incorreta");
+        this.usuarioLogin.senha = "";
+      }
+    } else {
+      console.log("Email incorreto");
+      this.usuarioLogin.email = "";
+    }
+  }
+
+  emailOuSenhaCorretos(eSenha: boolean, emailSenha: string): Usuario | undefined {
+    var result = undefined;
+    if (eSenha) {
+      result = this.usuarios.find(u => u.senha == emailSenha);
+    } else {
+      result = this.usuarios.find(u => u.email == emailSenha);
+    }
+    return result;
   }
 
   addUser(u: Usuario): void {

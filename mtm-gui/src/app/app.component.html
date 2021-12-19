@@ -21,6 +21,18 @@
   </tr>
 </table>
 
+<h2>Login</h2>
+<table>
+  <tr>
+    <td><label>Email</label></td>
+    <td><input [(ngModel)]="usuarioLogin.email"></td>
+    <td><button (click)="verifyUser(usuarioLogin)">Login</button></td>
+  </tr>
+  <tr>
+    <td><label>Senha</label></td>
+    <td><input [(ngModel)]="usuarioLogin.senha"></td>
+  </tr>
+</table>
 
 <h1>Mural de Recados</h1>
 
@@ -43,8 +55,6 @@
     <td><input [(ngModel)]="reuniao.description"></td>
   </tr>
 </table>
-
-
 
 <h2>Nome da reunião</h2>
 
