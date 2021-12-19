@@ -28,6 +28,7 @@ export class AppComponent {
   emailDuplicado: boolean = false;
   cpfDuplicado: boolean = false;
   tituloReuniaoDuplicado: boolean = false;
+  recadoSemConteudo: boolean = false;
 
   addMeeting(rn: Reuniao): void {
     this.date = new Date();
@@ -78,6 +79,7 @@ export class AppComponent {
     this.emailDuplicado = false;
     this.cpfDuplicado = false;
     this.tituloReuniaoDuplicado = false;
+    this.recadoSemConteudo = false;
   }
 
   addMessage(r: Recado): void {
@@ -86,7 +88,7 @@ export class AppComponent {
       this.mural.push(r);
       this.recado = { author: "", content: "" };
     } else {
-      this.recado.content = "Digite algum conteúdo";
+      this.recadoSemConteudo = true;
     }
   }
 

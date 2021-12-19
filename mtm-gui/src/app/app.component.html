@@ -77,6 +77,7 @@
     <tr>
       <td><label>Mensagem</label></td>
       <td><input [(ngModel)]="recado.content"></td>
+      <td *ngIf="recadoSemConteudo">Digite um conteúdo para o recado</td>
     </tr>
   </table>
 </html>
