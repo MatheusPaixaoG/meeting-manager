@@ -1,5 +1,7 @@
 import { Usuario } from "./usuario";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class UsuarioService {
   usuarios: Usuario[] = [];
   addUser(usuario: Usuario): Usuario | null {

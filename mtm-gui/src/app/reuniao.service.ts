@@ -1,6 +1,8 @@
 import { Reuniao } from "./reuniao";
 import { Usuario } from "./usuario";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class ReuniaoService {
   reunioes: Reuniao[] = [];
   addMeeting(reuniao: Reuniao, date: Date, usuarioAtivo: Usuario): Reuniao | null {

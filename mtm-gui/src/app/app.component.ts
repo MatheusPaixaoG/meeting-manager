@@ -24,9 +24,7 @@ export class AppComponent {
   mural: Recado[] = [];
   usuarios: Usuario[] = [];
   recado: Recado = { author: "", content: "" };
-  reuniaoService = new ReuniaoService();
-  muralService = new MuralService();
-  usuarioService = new UsuarioService();
+  constructor(private reuniaoService: ReuniaoService, private muralService: MuralService, private usuarioService: UsuarioService) { }
   emailDuplicado: boolean = false;
   cpfDuplicado: boolean = false;
   tituloReuniaoDuplicado: boolean = false;
