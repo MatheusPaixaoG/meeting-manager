@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
@@ -11,7 +13,7 @@ import { UsuarioService } from '../usuario.service';
 })
 export class CadastroComponent implements OnInit {
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   usuario: Usuario = new Usuario();
   usuarios!: Usuario[];
@@ -22,6 +24,7 @@ export class CadastroComponent implements OnInit {
     if (this.usuarioService.addUser(u)) {
       this.usuarios.push(u);
       this.usuario = new Usuario();
+      this.router.navigateByUrl('/login');
     } else {
       this.emailDuplicado = true;
       this.cpfDuplicado = true;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
 import { UsuarioLogin } from '../usuarioLogin';
@@ -10,7 +11,7 @@ import { UsuarioLogin } from '../usuarioLogin';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   usuarioAtivo = new Usuario();
   usuarios: Usuario[] = [];
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
         this.usuarioService.addActiveUser(this.usuarios[parseInt(this.indexOfEmail)]);
         this.usuarioService.setActiveUser(this.usuarios[parseInt(this.indexOfEmail)]);
         this.usuarioAtivo = this.usuarioService.getActiveUser();
+        this.router.navigateByUrl('/listaReunioes');
         console.log("Login feito com sucesso" + " " + this.usuarioAtivo.nome);
         this.usuarioLogin = { email: "", senha: "" };
       } else {

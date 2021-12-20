@@ -14,6 +14,7 @@ import { UsuarioLogin } from './usuarioLogin';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  mostraPaginaInicial: boolean = true;
   usuario: Usuario = new Usuario();
   usuarioLogin: UsuarioLogin = { email: "", senha: "" };
   usuarioAtivo = new Usuario();
@@ -31,6 +32,14 @@ export class AppComponent {
   recadoSemConteudo: boolean = false;
   usuarioLoginSenhaIncorreta: boolean = false;
   usuarioLoginEmailIncorreto: boolean = false;
+
+  apagarPaginaInicial(): void {
+    this.mostraPaginaInicial = false;
+  }
+
+  mostrarPaginaInicial(): void {
+    this.mostraPaginaInicial = true;
+  }
 
   addMeeting(rn: Reuniao): void {
     this.date = new Date();
