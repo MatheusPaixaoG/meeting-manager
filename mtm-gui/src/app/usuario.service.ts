@@ -22,6 +22,11 @@ export class UsuarioService {
     this.usuariosAtivos.push(usuario);
   }
 
+  deslogar(): void {
+    this.usuarioAtivo = new Usuario();
+    this.usuarioAtivo.nome = "qqq";
+  }
+
   setActiveUser(usuario: Usuario): void {
     var indexOfActiveUser = this.usuarios.findIndex(u => u.cpf == usuario.cpf);
     this.usuarioAtivo = this.usuarios[indexOfActiveUser];

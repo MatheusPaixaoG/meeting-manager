@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Reuniao } from '../reuniao';
 import { ReuniaoService } from '../reuniao.service';
-import { LoginComponent } from '../login/login.component';
 import { UsuarioService } from '../usuario.service';
 import { Usuario } from '../usuario';
 
@@ -30,6 +29,11 @@ export class ListaReunioesComponent implements OnInit {
     } else {
       this.tituloReuniaoDuplicado = true;
     }
+  }
+
+  deslogar(): void {
+    this.usuarioService.deslogar();
+    console.log(this.usuarioService.getActiveUser().nome);
   }
 
   addActiveMeeting(r: Reuniao): void {
