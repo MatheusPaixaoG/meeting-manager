@@ -1,0 +1,14 @@
+<h2>Login</h2>
+  <table>
+    <tr>
+      <td><label>Email</label></td>
+      <td><input [(ngModel)]="usuarioLogin.email"></td>
+      <td><button (click)="verifyUser(usuarioLogin)">Login</button></td>
+      <td *ngIf="usuarioLoginEmailIncorreto">Email incorreto</td>
+    </tr>
+    <tr>
+      <td><label>Senha</label></td>
+      <td><input [(ngModel)]="usuarioLogin.senha"></td>
+      <td *ngIf="usuarioLoginSenhaIncorreta">Senha incorreta</td>
+    </tr>
+  </table>

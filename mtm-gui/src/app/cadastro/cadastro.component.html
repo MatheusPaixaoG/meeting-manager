@@ -1,0 +1,24 @@
+<html (mousemove)="onMove()">
+  <h2>Cadastro</h2>
+  <table>
+    <tr>
+      <td><label>Nome</label></td>
+      <td><input [(ngModel)]="usuario.nome"></td>
+      <td><button (click)="addUser(usuario)">Cadastrar</button></td>
+    </tr>
+    <tr>
+      <td><label>Email</label></td>
+      <td><input [(ngModel)]="usuario.email"></td>
+      <td *ngIf="emailDuplicado">Já existe um usuário com esse email</td>
+    </tr>
+    <tr>
+      <td><label>Senha</label></td>
+      <td><input [(ngModel)]="usuario.senha"></td>
+    </tr>
+    <tr>
+      <td><label>CPF</label></td>
+      <td><input [(ngModel)]="usuario.cpf"></td>
+      <td *ngIf="cpfDuplicado">Já existe um usuário com esse CPF</td>
+    </tr>
+  </table>
+</html>

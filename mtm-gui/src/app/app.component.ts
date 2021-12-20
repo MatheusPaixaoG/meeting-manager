@@ -14,12 +14,12 @@ import { UsuarioLogin } from './usuarioLogin';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  usuario: Usuario = { nome: "", email: "", senha: "", cpf: "", reunioes: [] };
+  usuario: Usuario = new Usuario();
   usuarioLogin: UsuarioLogin = { email: "", senha: "" };
   usuarioAtivo = new Usuario();
   indexOfEmail!: string;
   date!: Date;
-  reuniao: Reuniao = { title: "", description: "", mural: [], date: this.date };
+  reuniao: Reuniao = new Reuniao();
   reunioes: Reuniao[] = [];
   mural: Recado[] = [];
   usuarios: Usuario[] = [];
@@ -36,7 +36,7 @@ export class AppComponent {
     this.date = new Date();
     if (this.reuniaoService.addMeeting(rn, this.date, this.usuarioAtivo)) {
       this.reunioes.push(rn);
-      this.reuniao = { title: "", description: "", mural: [], date: this.date };
+      this.reuniao = new Reuniao();
     } else {
       this.tituloReuniaoDuplicado = true;
     }
@@ -70,7 +70,7 @@ export class AppComponent {
   addUser(u: Usuario): void {
     if (this.usuarioService.addUser(u)) {
       this.usuarios.push(u);
-      this.usuario = { nome: "", email: "", senha: "", cpf: "", reunioes: [] };
+      this.usuario = new Usuario();
     } else {
       this.emailDuplicado = true;
       this.cpfDuplicado = true;
@@ -88,6 +88,7 @@ export class AppComponent {
 
   addMessage(r: Recado): void {
     if (this.descricaoValida(r.content)) {  // Se nada tiver sido escrito no campo da mensagem, pede para escrever algo
+      r.author = this.usuarioAtivo.nome;
       this.muralService.addMessage(r);
       this.mural.push(r);
       this.recado = { author: "", content: "" };
@@ -99,5 +100,9 @@ export class AppComponent {
   descricaoValida(content: string): boolean {
     var regex = "^\\s*$";
     return !content.match(regex);
+  }
+
+  updateUser(usuario: Usuario): void {
+    this.usuarioService.update(usuario);
   }
 }
