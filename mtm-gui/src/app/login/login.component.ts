@@ -46,6 +46,11 @@ export class LoginComponent implements OnInit {
     return result;
   }
 
+  onMove(): void {
+    this.usuarioLoginSenhaIncorreta = false;
+    this.usuarioLoginEmailIncorreto = false;
+  }
+
   ngOnInit(): void {
     this.usuarios = this.usuarioService.getUsers();
   }

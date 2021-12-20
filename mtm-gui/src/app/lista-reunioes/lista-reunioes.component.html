@@ -1,22 +1,26 @@
-<h1>Lista de reuniões</h1>
-  
-  <ul>
-    <li *ngFor="let reuniao of usuarioAtivo.reunioes">
-      <span> {{ reuniao.title }} </span>
-      <span> {{ reuniao.date }} </span>
-      <span> {{ reuniao.description }}</span>
-    </li>
-  </ul>
-  
-  <table>
-    <tr>
-      <td><label>Título da reunião</label></td>
-      <td><input [(ngModel)]="reuniao.title"></td>
-      <td><button (click)="addMeeting(reuniao)">Enviar</button></td>
-      <td *ngIf="tituloReuniaoDuplicado">Já existe uma reunião com esse título</td>
-    </tr>
-    <tr>
-      <td><label>Descrição da reunião</label></td>
-      <td><input [(ngModel)]="reuniao.description"></td>
-    </tr>
-  </table>
+<html (mousemove)="onMove()">
+  <h1>Lista de reuniões</h1>
+    
+    <ul>
+      <li *ngFor="let reuniao of reunioes">
+        <a [routerLink]="'/mural'" (click)="addActiveMeeting(reuniao)">
+          <span> {{ reuniao.title }} </span>
+          <span> {{ reuniao.date }} </span>
+          <span> {{ reuniao.description }}</span>
+        </a>
+      </li>
+    </ul>
+    
+    <table>
+      <tr>
+        <td><label>Título da reunião</label></td>
+        <td><input [(ngModel)]="reuniao.title"></td>
+        <td><button (click)="addMeeting(reuniao)">Enviar</button></td>
+        <td *ngIf="tituloReuniaoDuplicado">Não foi possível criar essa reunião</td>
+      </tr>
+      <tr>
+        <td><label>Descrição da reunião</label></td>
+        <td><input [(ngModel)]="reuniao.description"></td>
+      </tr>
+    </table>
+</html>

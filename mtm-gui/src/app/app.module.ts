@@ -11,13 +11,15 @@ import { ReuniaoService } from './reuniao.service';
 import { MuralService } from './mural.service';
 import { LoginComponent } from './login/login.component';
 import { ListaReunioesComponent } from './lista-reunioes/lista-reunioes.component';
+import { MuralComponent } from './mural/mural.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CadastroComponent,
     LoginComponent,
-    ListaReunioesComponent
+    ListaReunioesComponent,
+    MuralComponent
   ],
   imports: [
     BrowserModule,

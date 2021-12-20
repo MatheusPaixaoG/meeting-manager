@@ -11,6 +11,7 @@ export class UsuarioService {
     var result = null;
     if (this.cpfEEmailNaoCadastrados(usuario.cpf, usuario.email)) {
       this.usuarios.push(usuario);
+      console.log(this.usuarios);
       result = usuario;
     }
     return result;

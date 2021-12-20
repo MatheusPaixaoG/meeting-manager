@@ -1,0 +1,18 @@
+<html (mousemove)="onMove()">
+  <h2>Mural da reunião</h2>
+    
+    <ul>
+      <li *ngFor="let recado of mural">
+        <span> {{ recado.author }} </span>
+        <span> {{ recado.content }} </span>
+      </li>
+    </ul>
+    <table>
+      <tr>
+        <td><label>Mensagem</label></td>
+        <td><input [(ngModel)]="recado.content"></td>
+        <td><button (click)="addMessage(recado)">Enviar</button></td>
+        <td *ngIf="recadoSemConteudo">Digite um conteúdo para o recado</td>
+      </tr>
+    </table>
+</html>

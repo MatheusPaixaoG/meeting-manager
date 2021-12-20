@@ -23,7 +23,7 @@ export class AppComponent {
   reunioes: Reuniao[] = [];
   mural: Recado[] = [];
   usuarios: Usuario[] = [];
-  recado: Recado = { author: "", content: "" };
+  recado: Recado = new Recado();
   constructor(private reuniaoService: ReuniaoService, private muralService: MuralService, private usuarioService: UsuarioService) { }
   emailDuplicado: boolean = false;
   cpfDuplicado: boolean = false;
@@ -89,9 +89,9 @@ export class AppComponent {
   addMessage(r: Recado): void {
     if (this.descricaoValida(r.content)) {  // Se nada tiver sido escrito no campo da mensagem, pede para escrever algo
       r.author = this.usuarioAtivo.nome;
-      this.muralService.addMessage(r);
+      this.muralService.addMessage(r, this.reuniaoService.getActiveMeeting());
       this.mural.push(r);
-      this.recado = { author: "", content: "" };
+      this.recado = new Recado();
     } else {
       this.recadoSemConteudo = true;
     }
