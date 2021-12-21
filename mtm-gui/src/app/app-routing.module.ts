@@ -5,6 +5,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { ListaReunioesComponent } from './lista-reunioes/lista-reunioes.component';
 import { LoginComponent } from './login/login.component';
 import { MuralComponent } from './mural/mural.component';
+import { PaginaUsuarioComponent } from './pagina-usuario/pagina-usuario.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'paginaInicial',
     component: AppComponent
+  },
+  {
+    path: 'paginaUsuario',
+    component: PaginaUsuarioComponent
   }
 ];
 

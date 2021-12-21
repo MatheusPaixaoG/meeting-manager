@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         this.usuarioService.addActiveUser(this.usuarios[parseInt(this.indexOfEmail)]);
         this.usuarioService.setActiveUser(this.usuarios[parseInt(this.indexOfEmail)]);
         this.usuarioAtivo = this.usuarioService.getActiveUser();
-        this.router.navigateByUrl('/listaReunioes');
+        this.router.navigateByUrl('/paginaUsuario');
         console.log("Login feito com sucesso" + " " + this.usuarioAtivo.nome);
         this.usuarioLogin = { email: "", senha: "" };
       } else {

@@ -12,6 +12,7 @@ import { MuralService } from './mural.service';
 import { LoginComponent } from './login/login.component';
 import { ListaReunioesComponent } from './lista-reunioes/lista-reunioes.component';
 import { MuralComponent } from './mural/mural.component';
+import { PaginaUsuarioComponent } from './pagina-usuario/pagina-usuario.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MuralComponent } from './mural/mural.component';
     CadastroComponent,
     LoginComponent,
     ListaReunioesComponent,
-    MuralComponent
+    MuralComponent,
+    PaginaUsuarioComponent
   ],
   imports: [
     BrowserModule,
