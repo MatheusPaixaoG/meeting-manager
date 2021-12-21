@@ -1,0 +1,73 @@
+import { Usuario } from "../models/usuario";
+
+export class UsuarioController {
+  usuarios: Usuario[];
+  usuariosAtivos: Usuario[];
+  usuarioAtivo: Usuario;
+  count: number;
+
+  constructor() {
+    this.usuarios = [];
+    this.usuariosAtivos = [];
+    this.count = 0;
+  }
+
+  addUser(usuario: Usuario): boolean {
+    const newUsuario = new Usuario(this.count, usuario.nome, usuario.email, usuario.senha, usuario.cpf, usuario.reunioes);
+    if (this.cpfEEmailNaoCadastrados(usuario.cpf, usuario.email)) {
+      this.usuarios.push(newUsuario);
+      this.count++;
+      return true;
+    }
+    return false;
+  }
+
+  addActiveUser(usuario: Usuario): void {
+    const newUsuario = new Usuario(this.count, usuario.nome, usuario.email, usuario.senha, usuario.cpf, usuario.reunioes);
+    this.usuariosAtivos.push(newUsuario);
+  }
+
+  deslogar(id: number): boolean {
+    let usuarioIndex = this.usuariosAtivos.findIndex(u => u.id == id);
+    if (usuarioIndex == -1) {
+      return false;
+    }
+
+    this.usuarioAtivo = new Usuario(-1, "", "", "", "", []);
+    this.usuariosAtivos.splice(usuarioIndex, 1);
+    return true;
+  }
+
+  setActiveUser(id: number): boolean {
+    var indexOfActiveUser = this.usuarios.findIndex(u => u.id == id);
+    this.usuarioAtivo = this.usuarios[indexOfActiveUser];
+    return true;
+  }
+
+  cpfEEmailNaoCadastrados(cpf: string, email: string): boolean {
+    return !this.usuarios.find(u => u.cpf == cpf) && !this.usuarios.find(us => us.email == email);
+  }
+
+  update(id: number, nome: string, senha: string): boolean {
+    let usuarioIndex = this.usuarios.findIndex(u => u.id == id);
+    if (usuarioIndex == -1) {
+      return false;
+    }
+
+    this.usuarios[usuarioIndex].nome = nome;
+    this.usuarios[usuarioIndex].senha = senha;
+    return true;
+  }
+
+  getUsers(): Usuario[] {
+    return this.usuarios;
+  }
+
+  getActiveUsers(): Usuario[] {
+    return this.usuariosAtivos;
+  }
+
+  getActiveUser(): Usuario {
+    return this.usuarioAtivo;
+  }
+}

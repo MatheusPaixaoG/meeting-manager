@@ -24,7 +24,6 @@ export class UsuarioService {
 
   deslogar(): void {
     this.usuarioAtivo = new Usuario();
-    this.usuarioAtivo.nome = "qqq";
   }
 
   setActiveUser(usuario: Usuario): void {
