@@ -1,6 +1,7 @@
 import { Reuniao } from "./reuniao";
 
 export class Usuario {
+  id!: number;
   nome!: string;
   email!: string;
   senha!: string;
@@ -12,6 +13,7 @@ export class Usuario {
   }
 
   clean(): void {
+    this.id = -1;
     this.nome = "";
     this.email = "";
     this.senha = "";

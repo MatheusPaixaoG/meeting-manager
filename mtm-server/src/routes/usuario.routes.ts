@@ -14,7 +14,7 @@ usuarioRouter.route("/")
     return res.json({ usuarios });
   })
   .post((req: Request, res: Response) => {
-    let usuario: Usuario = req.body.Usuario;
+    let usuario: Usuario = req.body;
     const newUsuario = usuarioController.addUser(usuario);
     if (newUsuario) {
       return res.json({ message: "Usuário criado com sucesso" });

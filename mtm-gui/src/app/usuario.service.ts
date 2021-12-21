@@ -1,25 +1,33 @@
 import { Usuario } from "./usuario";
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class UsuarioService {
   usuarios: Usuario[] = [];
   usuariosAtivos: Usuario[] = [];
   usuarioAtivo = new Usuario();
-  addUser(usuario: Usuario): Usuario | null {
-    usuario = usuario.clone();
-    var result = null;
-    if (this.cpfEEmailNaoCadastrados(usuario.cpf, usuario.email)) {
-      this.usuarios.push(usuario);
-      console.log(this.usuarios);
-      result = usuario;
-    }
-    return result;
+
+  constructor(private http: HttpClient) { }
+
+  addUser(usuario: Usuario): Observable<any> {
+    // usuario = usuario.clone();
+    // var result = null;
+    // if (this.cpfEEmailNaoCadastrados(usuario.cpf, usuario.email)) {
+    //   this.usuarios.push(usuario);
+    //   console.log(this.usuarios);
+    //   result = usuario;
+    // }
+    // return result;
+
+    return this.http.post<any>('http://localhost:3000/usuarios', usuario);
   }
 
-  addActiveUser(usuario: Usuario): void {
-    usuario = usuario.clone();
-    this.usuariosAtivos.push(usuario);
+  addActiveUser(usuario: Usuario): Observable<any> {
+    // usuario = usuario.clone();
+    // this.usuariosAtivos.push(usuario);
+    return this.http.post<any>('http://localhost:3000/usuarios/' + usuario.id, usuario);
   }
 
   deslogar(): void {

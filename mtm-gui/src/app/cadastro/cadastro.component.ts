@@ -21,14 +21,23 @@ export class CadastroComponent implements OnInit {
   cpfDuplicado: boolean = false;
 
   addUser(u: Usuario): void {
-    if (this.usuarioService.addUser(u)) {
-      this.usuarios.push(u);
-      this.usuario = new Usuario();
-      this.router.navigateByUrl('/login');
-    } else {
-      this.emailDuplicado = true;
-      this.cpfDuplicado = true;
-    }
+    // if (this.usuarioService.addUser(u)) {
+    //   this.usuarios.push(u);
+    //   this.usuario = new Usuario();
+    //   this.router.navigateByUrl('/login');
+    // } else {
+    //   this.emailDuplicado = true;
+    //   this.cpfDuplicado = true;
+    // }
+
+    this.usuarioService.addUser(u).subscribe({
+      next: (result) => {
+        this.router.navigateByUrl('/login');
+      },
+      error: (result) => {
+        console.log(result);
+      }
+    })
   }
 
   onMove(): void {
