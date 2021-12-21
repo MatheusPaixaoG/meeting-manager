@@ -23,7 +23,7 @@ export class UsuarioController {
   }
 
   addActiveUser(usuario: Usuario): void {
-    const newUsuario = new Usuario(this.count, usuario.nome, usuario.email, usuario.senha, usuario.cpf, usuario.reunioes);
+    const newUsuario = new Usuario(usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.cpf, usuario.reunioes);
     this.usuariosAtivos.push(newUsuario);
   }
 
@@ -35,6 +35,17 @@ export class UsuarioController {
 
     this.usuarioAtivo = new Usuario(-1, "", "", "", "", []);
     this.usuariosAtivos.splice(usuarioIndex, 1);
+    return true;
+  }
+
+  deleteUser(id: number): boolean {
+    let userIndex = this.usuarios.findIndex(u => u.id == id);
+    if (userIndex == -1) {
+      return false;
+    }
+
+    let usuarioDeslogado = this.deslogar(userIndex);
+    this.usuarios.splice(userIndex, 1);
     return true;
   }
 
@@ -65,6 +76,16 @@ export class UsuarioController {
 
   getActiveUsers(): Usuario[] {
     return this.usuariosAtivos;
+  }
+
+  getUserById(id: number): Usuario {
+    const usuario = this.usuarios.find(u => u.id == id);
+    return usuario;
+  }
+
+  getActiveUserById(id: number): Usuario {
+    const usuarioAtivo = this.usuariosAtivos.find(u => u.id == id);
+    return usuarioAtivo;
   }
 
   getActiveUser(): Usuario {
