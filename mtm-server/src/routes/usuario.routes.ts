@@ -11,7 +11,8 @@ const reuniaoController = new ReuniaoController();
 usuarioRouter.route("/")
   .get((req: Request, res: Response) => {
     let usuarios = usuarioController.getUsers();
-    return res.json({ usuarios });
+    let activeUsers = usuarioController.getActiveUsers();
+    return res.json(usuarios);
   })
   .post((req: Request, res: Response) => {
     let usuario: Usuario = req.body;
@@ -22,6 +23,22 @@ usuarioRouter.route("/")
 
     return res.status(409).json({ err: "Não foi possível criar o usuário" });
   })
+usuarioRouter.route("/usuarioAtivo")
+  .get((req: Request, res: Response) => {
+    let usuarioAtivo = usuarioController.getActiveUser();
+
+    return res.json(usuarioAtivo);
+  })
+  .post((req: Request, res: Response) => {
+    let usuarioAtivo = usuarioController.getActiveUser();
+    let usuarioDepoisDeslogado = req.body;
+    let usuarioDeslogado = usuarioController.deslogar(usuarioAtivo.id, usuarioDepoisDeslogado);
+    if (!usuarioDeslogado) {
+      return res.status(404).json({ err: "Usuário não encontrado" });
+    }
+    let activeUsers = usuarioController.getActiveUsers();
+    return res.json({ activeUsers });
+  })
 usuarioRouter.route("/:id")
   .get((req: Request, res: Response) => {
     let id: number = parseInt(req.params.id);
@@ -31,10 +48,10 @@ usuarioRouter.route("/:id")
       return res.status(404).json({ err: "Usuário não encontrado" });
     }
 
-    return res.json({ activeUser });
+    return res.json(activeUser);
   })
   .post((req: Request, res: Response) => {
-    let id: number = parseInt(req.params.id)
+    let id: number = parseInt(req.params.id);
     let usuario = usuarioController.getUserById(id);
     let usuarioAtivo = usuarioController.addActiveUser(usuario);
 
@@ -99,4 +116,12 @@ usuarioRouter.route("/:id/reunioes")
 
     return res.status(200).json({ success: "Reunião deletada com sucesso" });
   })
+usuarioRouter.route("/:id/setActive")
+  .post((req: Request, res: Response) => {
+    let id: number = parseInt(req.params.id);
+    let usuario = usuarioController.setActiveUser(id);
+
+    return res.json({ message: "Usuário setado para ativo" });
+  })
+
 export default usuarioRouter;

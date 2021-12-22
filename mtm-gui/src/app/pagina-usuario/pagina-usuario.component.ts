@@ -14,12 +14,26 @@ export class PaginaUsuarioComponent implements OnInit {
   usuarioAtivo!: Usuario;
 
   deslogar(): void {
-    this.usuarioService.deslogar();
-    console.log(this.usuarioService.getActiveUser().nome);
+    this.usuarioService.deslogar().subscribe({
+      next: (result) => {
+        console.log(result);
+      },
+      error: (result) => {
+        console.log(result);
+      }
+    });
+    //console.log(this.usuarioService.getActiveUser().nome);
   }
 
   ngOnInit(): void {
-    this.usuarioAtivo = this.usuarioService.getActiveUser();
+    this.usuarioService.getActiveUser().subscribe({
+      next: (result) => {
+        this.usuarioAtivo = result;
+      },
+      error: (result) => {
+        console.log(result);
+      }
+    });
   }
 
 }

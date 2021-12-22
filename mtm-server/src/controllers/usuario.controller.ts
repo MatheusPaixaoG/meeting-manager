@@ -27,13 +27,14 @@ export class UsuarioController {
     this.usuariosAtivos.push(newUsuario);
   }
 
-  deslogar(id: number): boolean {
+  deslogar(id: number, usuarioDepoisDeslogado: Usuario): boolean {
     let usuarioIndex = this.usuariosAtivos.findIndex(u => u.id == id);
     if (usuarioIndex == -1) {
       return false;
     }
 
-    this.usuarioAtivo = new Usuario(-1, "", "", "", "", []);
+    console.log("deslogar");
+    this.usuarioAtivo = usuarioDepoisDeslogado;
     this.usuariosAtivos.splice(usuarioIndex, 1);
     return true;
   }
@@ -44,7 +45,8 @@ export class UsuarioController {
       return false;
     }
 
-    let usuarioDeslogado = this.deslogar(userIndex);
+    let usuarioDepoisDeslogado = new Usuario(-1, "", "", "", "", []);
+    let usuarioDeslogado = this.deslogar(userIndex, usuarioDepoisDeslogado);
     this.usuarios.splice(userIndex, 1);
     return true;
   }
@@ -89,6 +91,7 @@ export class UsuarioController {
   }
 
   getActiveUser(): Usuario {
+    console.log("controller");
     return this.usuarioAtivo;
   }
 }

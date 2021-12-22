@@ -23,11 +23,34 @@ export class LoginComponent implements OnInit {
   verifyUser(us: UsuarioLogin): void {
     if (this.emailOuSenhaCorretos(false, us.email)) {
       if (this.emailOuSenhaCorretos(true, us.senha)) {
-        this.usuarioService.addActiveUser(this.usuarios[parseInt(this.indexOfEmail)]);
-        this.usuarioService.setActiveUser(this.usuarios[parseInt(this.indexOfEmail)]);
-        this.usuarioAtivo = this.usuarioService.getActiveUser();
-        this.router.navigateByUrl('/paginaUsuario');
-        console.log("Login feito com sucesso" + " " + this.usuarioAtivo.nome);
+        let usuario = this.usuarios[parseInt(this.indexOfEmail)];
+        this.usuarioService.addActiveUser(usuario).subscribe({
+          next: (result) => {
+            console.log(result);
+          },
+          error: (result) => {
+            console.log(result);
+          }
+        });
+        this.usuarioService.setActiveUser(usuario).subscribe({
+          next: (result) => {
+            console.log(result);
+            this.usuarioService.getActiveUserById(usuario.id).subscribe({
+              next: (result) => {
+                this.usuarioAtivo = result;
+                console.log("Login feito com sucesso" + " " + this.usuarioAtivo.nome);
+                this.router.navigateByUrl('/paginaUsuario');
+              },
+              error: (result) => {
+                console.log(result);
+              }
+            })
+          },
+          error: (result) => {
+            console.log(result);
+          }
+        });
+
         this.usuarioLogin = { email: "", senha: "" };
       } else {
         this.usuarioLoginSenhaIncorreta = true;
@@ -54,6 +77,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuarios = this.usuarioService.getUsers();
+    this.usuarioService.getUsers().subscribe({
+      next: (result) => {
+        this.usuarios = result;
+        console.log(this.usuarios);
+      },
+      error: (result) => {
+        console.log(result);
+      }
+    })
   }
 }

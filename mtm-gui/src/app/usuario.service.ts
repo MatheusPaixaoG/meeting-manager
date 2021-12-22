@@ -30,13 +30,16 @@ export class UsuarioService {
     return this.http.post<any>('http://localhost:3000/usuarios/' + usuario.id, usuario);
   }
 
-  deslogar(): void {
-    this.usuarioAtivo = new Usuario();
+  deslogar(): Observable<any> {
+    let newUsuarioAtivo = new Usuario();
+    return this.http.post<any>('http://localhost:3000/usuarios/usuarioAtivo', newUsuarioAtivo);
+    // this.usuarioAtivo = new Usuario();
   }
 
-  setActiveUser(usuario: Usuario): void {
-    var indexOfActiveUser = this.usuarios.findIndex(u => u.cpf == usuario.cpf);
-    this.usuarioAtivo = this.usuarios[indexOfActiveUser];
+  setActiveUser(usuario: Usuario): Observable<any> {
+    // var indexOfActiveUser = this.usuarios.findIndex(u => u.cpf == usuario.cpf);
+    // this.usuarioAtivo = this.usuarios[indexOfActiveUser];
+    return this.http.post<any>('http://localhost:3000/usuarios/' + usuario.id + "/setActive", usuario);
   }
 
   cpfEEmailNaoCadastrados(cpf: string, email: string): boolean {
@@ -52,12 +55,20 @@ export class UsuarioService {
     }
   }
 
-  getUsers(): Usuario[] {
-    var result: Usuario[] = [];
-    for (let u of this.usuarios) {
-      result.push(u.clone());
-    }
-    return result;
+  getUsers(): Observable<Usuario[]> {
+    // var result: Usuario[] = [];
+    // for (let u of this.usuarios) {
+    //   result.push(u.clone());
+    // }
+    // return result;
+
+    return this.http.get<Usuario[]>('http://localhost:3000/usuarios');
+  }
+
+  getActiveUserById(id: number): Observable<any> {
+    return this.http.get<any>('http://localhost:3000/usuarios/' + id);
+    // let usuarioAtivo = this.usuariosAtivos.find(u => u.id == id);
+    // return usuarioAtivo;
   }
 
   getActiveUsers(): Usuario[] {
@@ -68,7 +79,12 @@ export class UsuarioService {
     return result;
   }
 
-  getActiveUser(): Usuario {
-    return this.usuarioAtivo;
+  // getActiveUser(): Usuario {
+  //   return this.usuarioAtivo;
+  // }
+
+  getActiveUser(): Observable<Usuario> {
+    return this.http.get<Usuario>('http://localhost:3000/usuarios/usuarioAtivo');
+    // return this.usuarioAtivo;
   }
 }

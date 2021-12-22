@@ -20,20 +20,27 @@ export class ListaReunioesComponent implements OnInit {
   tituloReuniaoDuplicado: boolean = false;
 
   addMeeting(rn: Reuniao): void {
-    this.usuarioAtivo = this.usuarioService.getActiveUser();
-    this.date = new Date();
-    rn.participantes.push(this.usuarioAtivo.email);
-    if (this.reuniaoService.addMeeting(rn, this.date, this.usuarioService.getActiveUser())) {
-      this.reunioes.push(rn);
-      this.reuniao = new Reuniao();
-    } else {
-      this.tituloReuniaoDuplicado = true;
-    }
+    this.usuarioService.getActiveUser().subscribe({
+      next: (result) => {
+        this.usuarioAtivo = result;
+        this.date = new Date();
+        rn.participantes.push(this.usuarioAtivo.email);
+        if (this.reuniaoService.addMeeting(rn, this.date, this.usuarioAtivo)) {
+          this.reunioes.push(rn);
+          this.reuniao = new Reuniao();
+        } else {
+          this.tituloReuniaoDuplicado = true;
+        }
+      },
+      error: (result) => {
+        console.log(result);
+      }
+    });
   }
 
   deslogar(): void {
     this.usuarioService.deslogar();
-    console.log(this.usuarioService.getActiveUser().nome);
+    console.log(this.usuarioAtivo.nome);
   }
 
   addActiveMeeting(r: Reuniao): void {
@@ -48,7 +55,15 @@ export class ListaReunioesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reunioes = this.reuniaoService.getMeetings(this.usuarioService.getActiveUser());
+    this.usuarioService.getActiveUser().subscribe({
+      next: (result) => {
+        this.usuarioAtivo = result;
+        this.reunioes = this.reuniaoService.getMeetings(this.usuarioAtivo);
+      },
+      error: (result) => {
+        console.log(result);
+      }
+    });
   }
 
 }

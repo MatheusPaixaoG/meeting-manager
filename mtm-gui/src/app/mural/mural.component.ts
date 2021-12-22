@@ -19,18 +19,25 @@ export class MuralComponent implements OnInit {
   recadoSemConteudo: boolean = false;
 
   addMessage(r: Recado): void {
-    this.usuarioAtivo = this.usuarioService.getActiveUser();
-    r.author = this.getActiverUserName();
-    if (this.muralService.addMessage(r, this.reuniaoService.getActiveMeeting())) {  // Se nada tiver sido escrito no campo da mensagem, pede para escrever algo
-      this.mural.push(r);
-      this.recado = new Recado();
-    } else {
-      this.recadoSemConteudo = true;
-    }
+    this.usuarioService.getActiveUser().subscribe({
+      next: (result) => {
+        this.usuarioAtivo = result;
+        r.author = this.getActiverUserName();
+        if (this.muralService.addMessage(r, this.reuniaoService.getActiveMeeting())) {  // Se nada tiver sido escrito no campo da mensagem, pede para escrever algo
+          this.mural.push(r);
+          this.recado = new Recado();
+        } else {
+          this.recadoSemConteudo = true;
+        }
+      },
+      error: (result) => {
+        console.log(result);
+      }
+    });
   }
 
   getActiverUserName(): string {
-    return this.usuarioService.getActiveUser().nome;
+    return this.usuarioAtivo.nome;
   }
 
   descricaoValida(content: string): boolean {

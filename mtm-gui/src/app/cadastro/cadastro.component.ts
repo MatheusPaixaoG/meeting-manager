@@ -35,6 +35,8 @@ export class CadastroComponent implements OnInit {
         this.router.navigateByUrl('/login');
       },
       error: (result) => {
+        this.emailDuplicado = true;
+        this.cpfDuplicado = true;
         console.log(result);
       }
     })
@@ -46,7 +48,15 @@ export class CadastroComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuarios = this.usuarioService.getUsers();
+    this.usuarioService.getUsers().subscribe({
+      next: (result) => {
+        this.usuarios = result;
+      },
+      error: (result) => {
+        console.log(result);
+      }
+    })
+    // this.usuarios = this.usuarioService.getUsers();
   }
 
 }
