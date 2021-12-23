@@ -93,13 +93,13 @@ usuarioRouter.route("/:id/reunioes")
   })
   .post((req: Request, res: Response) => {
     let id: number = parseInt(req.params.id);
-    let reuniao: Reuniao = req.body.Reuniao;
+    let reuniao: Reuniao = req.body;
     let activeUser = usuarioController.getActiveUserById(id);
     reuniao.participantes.push(activeUser.id);
     const newReuniao = reuniaoController.addMeeting(reuniao, activeUser);
 
     if (newReuniao) {
-      return res.json({ mensagem: "Reunião criada com sucesso!" });
+      return res.json(reuniao);
     }
 
     return res.status(409).json({ err: "Não foi possível criar a reunião." });

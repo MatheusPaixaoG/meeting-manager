@@ -1,14 +1,15 @@
 <html (mousemove)="onMove()">
-  <a [routerLink]="'/paginaInicial'" (click)="deslogar()">Deslogar</a>
+  <a [routerLink]="'/paginaInicial'" (click)="deslogar()">Deslogar</a><br><br>
   <a [routerLink]="'/paginaUsuario'">Voltar para a Página do usuário</a>
   <h1>Lista de reuniões</h1>
     
     <ul>
       <li *ngFor="let reuniao of reunioes">
         <a [routerLink]="'/mural'" (click)="addActiveMeeting(reuniao)">
-          <span> {{ reuniao.title }} </span>
-          <span> {{ reuniao.date }} </span>
-          <span> {{ reuniao.description }}</span>
+          <span> {{ reuniao.title }} </span><br>
+          <span> {{ reuniao.data_inicio }} </span><br>
+          <span> {{ reuniao.data_fim }}</span><br>
+          <span> {{ reuniao.description }}</span><br>
         </a>
       </li>
     </ul>
@@ -23,6 +24,18 @@
       <tr>
         <td><label>Descrição da reunião</label></td>
         <td><input [(ngModel)]="reuniao.description"></td>
+      </tr>
+      <tr>
+        <td><label>Data de início da reunião</label></td>
+        <td><input type="datetime-local" name="begin" 
+          placeholder="dd-mm-yyyy" value=""
+          min="1997-01-01" max="2030-12-31" [(ngModel)]="data_inicio"></td>
+      </tr>
+      <tr>
+        <td><label>Data de final da reunião</label></td>
+        <td><input type="datetime-local" name="begin" 
+          placeholder="dd-mm-yyyy" value=""
+          min="1997-01-01" max="2030-12-31" [(ngModel)]="data_fim"></td>
       </tr>
     </table>
 </html>

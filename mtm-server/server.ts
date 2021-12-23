@@ -1,7 +1,6 @@
 import express from 'express';
 import muralRouter from './src/routes/mural.routes';
 import reuniaoRouter from './src/routes/reuniao.routes';
-import userRouter from './src/routes/user.routes';
 import usuarioRouter from './src/routes/usuario.routes';
 
 const app = express();

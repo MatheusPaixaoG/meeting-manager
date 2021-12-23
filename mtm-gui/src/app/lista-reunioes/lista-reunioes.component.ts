@@ -12,25 +12,40 @@ import { Usuario } from '../usuario';
 export class ListaReunioesComponent implements OnInit {
 
   constructor(private usuarioService: UsuarioService, private reuniaoService: ReuniaoService) { }
+  data_inicio: any;
+  data_fim: any;
   usuarioAtivo = new Usuario();
   reuniaoAtiva = new Reuniao();
-  date!: Date;
   reunioes: Reuniao[] = [];
   reuniao: Reuniao = new Reuniao();
   tituloReuniaoDuplicado: boolean = false;
 
   addMeeting(rn: Reuniao): void {
+    var dataInicioEntered = new Date(this.data_inicio);
+    var dataFimEntered = new Date(this.data_fim);
+    console.log(this.data_inicio);
+    console.log(this.data_fim);
+    console.log(dataInicioEntered);
+    console.log(dataFimEntered);
     this.usuarioService.getActiveUser().subscribe({
       next: (result) => {
         this.usuarioAtivo = result;
-        this.date = new Date();
         rn.participantes.push(this.usuarioAtivo.email);
-        if (this.reuniaoService.addMeeting(rn, this.date, this.usuarioAtivo)) {
-          this.reunioes.push(rn);
-          this.reuniao = new Reuniao();
-        } else {
-          this.tituloReuniaoDuplicado = true;
-        }
+        this.reuniaoService.addMeeting(rn, dataInicioEntered, dataFimEntered, this.usuarioAtivo).subscribe({
+          next: (result) => {
+            console.log(result);
+            this.reunioes.push(result);
+          },
+          error: (result) => {
+            console.log(result);
+            this.tituloReuniaoDuplicado = true;
+          }
+        })
+        // var retorno = this.reuniaoService.addMeeting(rn, dataInicioEntered, dataFimEntered, this.usuarioAtivo);
+        // if (retorno) {
+        //   this.reuniao = new Reuniao();
+        // } else {
+        // }
       },
       error: (result) => {
         console.log(result);

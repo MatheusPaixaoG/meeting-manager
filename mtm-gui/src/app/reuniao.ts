@@ -18,8 +18,8 @@ export class Reuniao {
   clean(): void {
     this.title = "";
     this.data_inicio = new Date();
-    this.data_fim = new Date();
-    this.date = new Date();
+    // this.data_fim = new Date();
+    this.date = this.data_inicio;
     this.description = "";
     this.participantes = [];
     this.mural = [];
@@ -30,7 +30,7 @@ export class Reuniao {
     reuniao.title = this.title;
     reuniao.data_inicio = this.data_inicio;
     reuniao.data_fim = this.data_fim;
-    reuniao.date = this.date;
+    reuniao.date = this.data_inicio;
     reuniao.description = this.description;
     reuniao.participantes = this.cloneParticipantes();
     reuniao.mural = this.cloneMural();

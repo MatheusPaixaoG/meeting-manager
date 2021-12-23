@@ -41,16 +41,6 @@ export class AppComponent {
     this.mostraPaginaInicial = true;
   }
 
-  addMeeting(rn: Reuniao): void {
-    this.date = new Date();
-    if (this.reuniaoService.addMeeting(rn, this.date, this.usuarioAtivo)) {
-      this.reunioes.push(rn);
-      this.reuniao = new Reuniao();
-    } else {
-      this.tituloReuniaoDuplicado = true;
-    }
-  }
-
   verifyUser(us: UsuarioLogin): void {
     if (this.emailOuSenhaCorretos(false, us.email)) {
       if (this.emailOuSenhaCorretos(true, us.senha)) {

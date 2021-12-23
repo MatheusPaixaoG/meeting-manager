@@ -14,9 +14,8 @@ export class ReuniaoController {
   }
 
   addMeeting(reuniao: Reuniao, usuarioAtivo: Usuario): boolean {
-    if (this.descricaoValida(reuniao.title) && !(this.reuniaoConflict)) {
-      let date: Date = new Date()
-      const newMeeting = new Reuniao(this.count, reuniao.title, reuniao.description, reuniao.participantes, reuniao.mural);
+    if (this.descricaoValida(reuniao.title)) {
+      const newMeeting = new Reuniao(this.count, reuniao.title, reuniao.data_inicio, reuniao.data_fim, reuniao.description, reuniao.participantes, reuniao.mural);
       this.reunioes.push(newMeeting);
       this.count++;
       usuarioAtivo.reunioes.push(newMeeting);
@@ -61,7 +60,9 @@ export class ReuniaoController {
 
   reuniaoConflict(reuniao: Reuniao, usuario: Usuario): boolean {
     let reunioesWithUser = this.reunioes.filter(r => r.participantes.find(p => p == usuario.id));
-    let reunioesSameTime = reunioesWithUser.filter(r => (r.data_inicio <= reuniao.data_inicio && reuniao.data_inicio <= r.data_fim) || (r.data_fim <= reuniao.data_inicio && reuniao.data_fim <= r.data_fim ));
+    let reunioesSameTime = reunioesWithUser.filter(r => (r.data_inicio < reuniao.data_inicio && reuniao.data_inicio < r.data_fim) || (r.data_fim < reuniao.data_inicio && reuniao.data_fim < r.data_fim));
+    console.log(reunioesSameTime);
     return (reunioesSameTime.length != 0);
+
   }
 }
